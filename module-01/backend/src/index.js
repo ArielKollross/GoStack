@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { uuid, isUuid } = require('uuidv4');
 
 const app = express();
@@ -6,6 +7,7 @@ const app = express();
 const port = 3333;
 const url = 'localhost';
 
+app.use(cors());
 app.use(express.json()); // need to be before all routes 
 
 const projects = [];

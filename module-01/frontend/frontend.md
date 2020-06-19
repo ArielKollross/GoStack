@@ -23,3 +23,5 @@ and after run this:
 `yarn add style-loader css-loader`
 
 `yarn add file-loader`
+
+`yarn add @babel/plugin-transform-runtime -D`
