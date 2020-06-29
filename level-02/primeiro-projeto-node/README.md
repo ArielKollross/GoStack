@@ -33,3 +33,8 @@ On package.json file we add:
 
 Run the `yarn dev:server` to run development ambience using ts-node-dev. The flag `--transpileOnly`
 this is ignore buil correction on typescipt, and `--ignore-watch` to igonre files on build.
+
+Configure design patterns:
+
+`yarn add eslint@6.8.0 -D`
+`yarn eslint --init`
