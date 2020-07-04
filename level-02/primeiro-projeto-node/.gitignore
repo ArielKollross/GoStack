@@ -1,2 +1,6 @@
 node_modules
 *.lock
+tmp/*
+!tmp/.gitkeep
+.vscode/
+.idea/
