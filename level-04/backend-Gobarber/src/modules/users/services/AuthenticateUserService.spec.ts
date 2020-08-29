@@ -70,7 +70,7 @@ describe('AuthenticateUser', () => {
       password: 'BatSecretPassword',
     });
 
-    expect(authenticateUser.execute({
+    await expect(authenticateUser.execute({
       email: 'batman@email.com',
       password: 'batata',
     })).rejects.toBeInstanceOf(AppError);
