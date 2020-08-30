@@ -14,4 +14,5 @@ export default class SessionsController {
   });
 
   return response.status(204).json();
+  }
 }
