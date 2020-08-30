@@ -4,15 +4,21 @@ import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeStoreProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import UpdateUserAvatarService from './UpdateUserAvatarService';
 
-describe('UpdateUserAvatar', () => {
-  it('Should be able to create a new user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeStorageProvider = new FakeStoreProvider();
+let fakeUsersRepository: FakeUsersRepository;
+let fakeStorageProvider: FakeStoreProvider;
+let updateUserAvatar: UpdateUserAvatarService;
 
-    const updateUserAvatar = new UpdateUserAvatarService(
+describe('UpdateUserAvatar', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeStorageProvider = new FakeStoreProvider();
+    updateUserAvatar = new UpdateUserAvatarService(
       fakeUsersRepository,
       fakeStorageProvider
     );
+  });
+  it('Should be able to create a new user', async () => {
+
 
     const user = await fakeUsersRepository.create({
       name: 'Iron Man',
@@ -37,7 +43,7 @@ describe('UpdateUserAvatar', () => {
       fakeStorageProvider
     );
 
-    expect(updateUserAvatar.execute({
+    await expect(updateUserAvatar.execute({
       user_id: 'non-existing-user',
       avatarFilename: 'avatar.jpg',
     })).rejects.toBeInstanceOf(AppError);
