@@ -5,7 +5,6 @@ import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
 
 import User from '@modules/users/infra/typeorm/entities/User';
-import { isThisSecond } from 'date-fns';
 
 interface IRequest {
   user_id: string;
