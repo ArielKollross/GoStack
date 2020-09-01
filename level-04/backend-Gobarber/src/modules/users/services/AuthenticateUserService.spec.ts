@@ -51,7 +51,7 @@ describe('AuthenticateUser', () => {
   });
 
   it('Should be not able to authenticate with wrong password', async () => {
-    const user = await createUser.execute({
+    await createUser.execute({
       name: 'Batman',
       email: 'batman@email.com',
       password: 'BatSecretPassword',
