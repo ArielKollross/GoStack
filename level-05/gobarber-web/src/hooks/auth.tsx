@@ -4,6 +4,7 @@ import api from '../services/api';
 interface User {
   id: string;
   name: string;
+  email: string;
   avatar_url: string;
 }
 
@@ -21,6 +22,7 @@ interface AuthContextData {
   user: User;
   signIn(credentials: SignInCredentials): Promise<void>;
   sigOut(): void;
+  updateUser(user: User): void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -51,6 +53,8 @@ const AuthProvider: React.FC = ({ children }) => {
     localStorage.setItem('@GoBarber: user', JSON.stringify(user));
 
     api.defaults.headers.authorization = `Bearer ${token}`;
+
+    setData({ token, user });
   }, []);
 
   const sigOut = useCallback(() => {
@@ -60,21 +64,35 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState);
   }, []);
 
+  const updateUser = useCallback(
+    (user: User) => {
+      localStorage.setItem('@GoBarber: user', JSON.stringify(user));
+
+      setData({
+        token: data.token,
+        user,
+      });
+    },
+    [setData, data.token],
+  );
+
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, sigOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, signIn, sigOut, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
 function useAuth(): AuthContextData {
-  const contex = useContext(AuthContext);
+  const context = useContext(AuthContext);
 
-  if (!contex) {
+  if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
 
-  return contex;
+  return context;
 }
 
 export { AuthProvider, useAuth };
