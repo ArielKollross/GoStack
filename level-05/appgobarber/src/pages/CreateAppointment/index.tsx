@@ -132,7 +132,7 @@ const CreateAppointment: React.FC = () => {
     <Container>
       <Header>
         <BackButton onPress={navigateBack}>
-          <Icon name="chevron-left" size={24} color="999591" />
+          <Icon name="chevron-left" size={24} color="#999591" />
         </BackButton>
 
         <HeaderTitle>Cabeleireios</HeaderTitle>
